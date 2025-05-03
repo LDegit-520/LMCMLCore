@@ -26,7 +26,7 @@ namespace LMCMLCore.CORE.DownLoad
         /// </summary>
         public string Path { get; set; }
         /// <summary>
-        /// 文件大小，默认为3MB
+        /// 文件大小，默认为3MB 单位为B
         /// </summary>
         public long Size { get; set; } = 3 * 1024 * 1024;
         /// <summary>

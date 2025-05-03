@@ -92,10 +92,10 @@ namespace LMCMLCore.CORE.Install.mc
                     StartJsonInfo startJsonInfo = new StartJsonInfo()
                     {
                         Name = Vername,
-                        StartJarPath = jarpath,
-                        GameJsonPath = mcversionjsonpath,
-                        AssetsJsonPath = assetsJson,
-                        LoggingPath = loggingpath,
+                        StartJarPath = jarpath.Replace(PATH.EXE,PATH._LMCML_STR),
+                        GameJsonPath = mcversionjsonpath.Replace(PATH.EXE, PATH._LMCML_STR),
+                        AssetsJsonPath = assetsJson.Replace(PATH.EXE, PATH._LMCML_STR),
+                        LoggingPath = loggingpath.Replace(PATH.EXE, PATH._LMCML_STR),
                     };
                     //构造相关文件夹
                     Directory.CreateDirectory(Path.Combine(PATH.VERSIONS, Vername));//创建版本实例文件夹

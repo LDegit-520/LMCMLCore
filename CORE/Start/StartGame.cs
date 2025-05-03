@@ -1,4 +1,4 @@
-using LMCMLCore.CORE.API;
+using LMCMLCore.CORE.Model;
 using LMCMLCore.CORE.data;
 using LMCMLCore.CORE.datainfo;
 using LMCMLCore.CORE.Json.Mc;
@@ -128,7 +128,7 @@ namespace LMCMLCore.CORE.Start
                     VJjvm.Add(item.Key, item.Value);
                 }
             }
-            Version_json version_Json = new Version_json(startJson.GameJsonPath,VJgame,VJjvm,DATA.OS.id,DATA.OS.is64bit);
+            Version_json version_Json = new Version_json(startJson.GameJsonPath.Replace(PATH._LMCML_STR,PATH.EXE), VJgame,VJjvm,DATA.OS.id,DATA.OS.is64bit);
             Logger.Info(nameof(Start), $"开始处理版本清单{startJson.Name}.json");
             //javaexe路径
             if(!string.IsNullOrEmpty(startJson.JavaPath))//如果指定java
@@ -158,7 +158,7 @@ namespace LMCMLCore.CORE.Start
                 Libs.Append(version_Json.Libraries[i].path);
                 Libs.Append(fgf);
             }
-            Libs.Append(startJson.StartJarPath + "\"");
+            Libs.Append(startJson.StartJarPath.Replace(PATH._LMCML_STR,PATH.EXE) + "\"");
             //补全参数
             Dictionary<string, string> gamejvmArg = new()
             {
@@ -194,7 +194,7 @@ namespace LMCMLCore.CORE.Start
                 }
             }
             //合并jvm添加主类合并game
-            string JMG=string.Join(" ",version_Json.Arg_Jvm)+$" {version_Json.McLogging.argument.Replace("${path}",$"{Path.Combine(PATH.GLOGGING,version_Json.McLogging.id)}")} {version_Json.GetMainclass()} "+string.Join(" ",version_Json.Arg_Game);
+            string JMG=string.Join(" ",version_Json.Arg_Jvm)+$" {version_Json.McLogging.argument.Replace("${path}",$"{startJson.LoggingPath.Replace(PATH._LMCML_STR, PATH.EXE)}")} {version_Json.GetMainclass()} "+string.Join(" ",version_Json.Arg_Game);
             //game替换
             foreach (var item in DATA.ARGUMENT_GAME_DZ)
             {

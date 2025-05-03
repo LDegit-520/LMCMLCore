@@ -22,7 +22,7 @@ namespace LMCMLCore.CORE.I18N
     /// 命名规则为 class_xxx 类名_解释
     /// <para>请注意{0}等为占位符</para>
     /// </summary>
-    public class I18NLoggerString
+    public class I18NString
     {
         public static string PATH_EXEPATHWARRING = "请注意你现在正在使用Windows平台进行游玩，但是你的exe路径长度大于130字符，为了防止在以后的运行中出现错误，请及时修改,现在提供一下几种解决方法\r\n" +
             "1.关闭启动器，打开exe文件路径{0}，将exe文件和.minecraft文件夹和LMCML文件夹进行剪切移动。如果你的电脑上存在D盘可以在D盘根目录建立一个纯英文文件夹，将前面剪切的文件放入，如果不存在，那就在C盘根目录创建\r\n" +
@@ -34,22 +34,7 @@ namespace LMCMLCore.CORE.I18N
         public static string PATH_wenjianchuangjian = "文件夹已创建：";
         public static string PATH_wenjianwancheng = "文件夹检查完成，均已存在";
 
-        public static string DownLoadManager_Fail = "任务 {0} 第{1}次失败，正在重试";
-        public static string DownLoadManager_Error = "任务出错";
-        public static string DownLoadManager_Disposed = "实例资源已清理，无法调用";
-        public static string DownLoadManager_TaskFinish = "下载任务已完成，保存到：";
-        public static string DownLoadManager_TaskAnagerError = "无法获取文件信息（尝试了 {0} 次）";
-        public static string DownLoadManager_tempfilenull = "临时文件不存在";
-        public static string DownLoadManager_downtimeout = "下载超时（{0} 分钟）";
-        public static string DownLoadManager_filesize = "文件大小不匹配:";
-        public static string DownLoadManager_noRangerError = "服务器不支持分段下载.状态码：";
-        public static string DownLoadManager_HttpError = "请求服务器获取文件头出错";
-        public static string DownLoadManager_KaishiTask = "开始下载";
-        public static string DownLoadManager_TAskCanel = "任务取消";
-        public static string DownLoadManager_TAskError = "下载出现错误";
-        public static string DownLoadManager_DisposedError = "等待任务退出时发生错误:";
-
-        public static string McDown_VErsionJsonError = "版本清单下载失败";
+        public static string MessageTitleContent_Title_moren = "通知";
 
         /// <summary>
         /// 设置国际化文本
@@ -60,13 +45,13 @@ namespace LMCMLCore.CORE.I18N
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new StaticClassConverter<I18NLoggerString>() },
+                Converters = { new StaticClassConverter<I18NString>() },
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All),
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,//忽略null
                 WriteIndented = true // 可选：格式化JSON
             };
             string jsontxt = File.ReadAllText(path);
-            JsonSerializer.Deserialize<I18NLoggerString>(jsontxt,options);
+            JsonSerializer.Deserialize<I18NString>(jsontxt,options);
         }
         /// <summary>
         /// 将此类json化到指定文件
@@ -76,19 +61,19 @@ namespace LMCMLCore.CORE.I18N
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new StaticClassConverter<I18NLoggerString>() },
+                Converters = { new StaticClassConverter<I18NString>() },
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All),
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,//忽略null
                 WriteIndented = true // 可选：格式化JSON
             };
-            string jsontxt = JsonSerializer.Serialize<I18NLoggerString>(new I18NLoggerString(),options);
+            string jsontxt = JsonSerializer.Serialize<I18NString>(new I18NString(),options);
             //Console.WriteLine(jsontxt);
             File.WriteAllText(path,jsontxt);
         }
         public static void I18NJSON(string  path)
         {
             Dictionary<string, string> jsontext = new() { 
-                { "I18N",PATH.I18N_ZH_CN_JSON},
+                { "I18N",PATH.I18N_ZH_CN_JSON.Replace(PATH.EXE,PATH._LMCML_STR)},
                 { "备注:" , "请注意如果需要根据zh_cn.json生成其他语言的文档时请保留 '{0}'等这些是程序文档中的占位符"}
 
             };

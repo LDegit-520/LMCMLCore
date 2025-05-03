@@ -128,6 +128,29 @@ namespace LMCMLCore.CORE.Json.Mc
             Dislibraries(OSname, OSis64);
             Logger.Info(nameof(Version_json), "读取lib");
         }
+        /// <summary>
+        /// 版本清单json构造函数
+        /// </summary>
+        /// <param name="Ajson">已经读取的版本清单json</param>
+        /// <param name="_GameArg">Game参数主要为那些带规则参数和是否添加</param>
+        /// <param name="_JvmArg">Jvm参数为自定义的jvm参数，值的真假代表是否为通用jvm参数（真代表新旧版均要添加，假代表仅有旧版添加）</param>
+        /// <param name="OSname">当前系统名称windows，osx，linux</param>
+        /// <param name="OSis64">当前系统位数（主要给windows使用）</param>
+        public Version_json(ArgumentsJson Ajson, Dictionary<string, bool> _GameArg, Dictionary<string, bool> _JvmArg, string OSname, string OSis64)
+        {
+            argumentsJson = Ajson;
+            Logger.Info(nameof(Version_json), "读取文件");
+            DisArguments(_GameArg, _JvmArg, OSname);
+            Logger.Info(nameof(Version_json), "读取Arg");
+            DisAsserts();
+            Logger.Info(nameof(Version_json), "读取asserts");
+            DisDownload();
+            Logger.Info(nameof(Version_json), "读取down");
+            DisLogging();
+            Logger.Info(nameof(Version_json), "读取logging");
+            Dislibraries(OSname, OSis64);
+            Logger.Info(nameof(Version_json), "读取lib");
+        }
         public void Dislibraries(string OSname,string OSis64)
         {
             var libs = argumentsJson.libraries;

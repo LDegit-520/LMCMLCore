@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LMCMLCore.CORE.API
+namespace LMCMLCore.CORE.Model
 {
     /// <summary>
     /// 环形缓冲数据区

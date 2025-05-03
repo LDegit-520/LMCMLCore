@@ -28,6 +28,7 @@ namespace LMCMLCore.CORE.data
         /// </summary>
         public readonly static string _NATIVES = "natives";
         public readonly static string _START_JSON = "start.json";
+        public readonly static string _LMCML_STR = "${LMCML}";
         #region 文件夹
         /// <summary>
         /// 获取exe所在目录（不带文件名，末尾自动带斜杠）//会检查windows平台的长度限制
@@ -181,7 +182,7 @@ namespace LMCMLCore.CORE.data
                     {
                         if ((Environment.OSVersion.Platform == PlatformID.Win32NT) && EXE.Length > 130)//如果是win平台且exe路径大于130
                         {
-                            Logger.Warning("EXE", $"EXE:{EXE}--{string.Format(I18N.I18NLoggerString.PATH_EXEPATHWARRING, $"{EXE}")}");
+                            Logger.Warning("EXE", $"EXE:{EXE}--{string.Format(I18N.I18NString.PATH_EXEPATHWARRING, $"{EXE}")}");
                         }
                         continue;
                     }
@@ -206,14 +207,14 @@ namespace LMCMLCore.CORE.data
                     if (!Directory.Exists(path))
                     {
                         Directory.CreateDirectory(path);
-                        Logger.Info(nameof(PATH), $"{I18NLoggerString.PATH_wenjianchuangjian}{path}");
+                        Logger.Info(nameof(PATH), $"{I18NString.PATH_wenjianchuangjian}{path}");
                     }
                 }
-                Logger.Info(nameof(PATH), I18NLoggerString.PATH_wenjianwancheng);
+                Logger.Info(nameof(PATH), I18NString.PATH_wenjianwancheng);
             }
             catch (Exception ex)
             {
-                Logger.Error(nameof(PATH), $"{I18NLoggerString.PATH_wenjiancuowu}{ex}");
+                Logger.Error(nameof(PATH), $"{I18NString.PATH_wenjiancuowu}{ex}");
             }
         }
         #endregion
