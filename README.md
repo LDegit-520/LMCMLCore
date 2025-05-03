@@ -1,6 +1,6 @@
 # LMCML
 
-<?xml version="1.0" encoding="UTF-8"?>
+
 <svg id="uuid-794ed587-ef66-420e-b6ff-e347d71c8abf" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 809.6 391.7">
   <path d="m0,342.73V0h26.99v293.77h107.95v48.96H0Z" style="fill: #7160ff;"/>
   <path d="m161.92,342.73V0h26.99v48.96h26.99v48.96h-26.99v244.81h-26.99Zm53.97-195.85v-48.96h26.99v48.96h-26.99Zm53.97,195.85V97.92h-26.99v-48.96h26.99V0h26.99v342.73h-26.99Z" style="fill: #7160ff;"/>
