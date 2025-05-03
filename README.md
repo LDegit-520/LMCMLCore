@@ -6,7 +6,7 @@
 
 ---
 
-本项目使用 [CC_BY_DC_SA](https://creativecommons.org/licenses/by-nc-sa/4.0)
+本项目使用 [CC_BY_NC_SA](https://creativecommons.org/licenses/by-nc-sa/4.0)
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
 <a property="dct:title" rel="cc:attributionURL" href="https://github.com/LDegit-520/LMCMLCore">LMCMLCore</a> by <span property="cc:attributionName">LI</span> is licensed under 
