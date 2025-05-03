@@ -1,3 +1,5 @@
+using LMCMLCore.CORE.Install.mc;
+using LMCMLCore.CORE.Json.Mc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace LMCMLCore.CORE.Install.fabric
     /// </summary>
     public class FabricInstall
     {
-        public FabricInstall()
+        public FabricInstall(McVersionInfo mcVersion,string fabricver, string vername)
         {
 
         }

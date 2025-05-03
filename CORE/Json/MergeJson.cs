@@ -1,3 +1,4 @@
+using LMCMLCore.CORE.data;
 using LMCMLCore.CORE.Json.Mc;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,11 @@ namespace LMCMLCore.CORE.Json
                 }
             };
             ArgumentsJson argumentsJson = JsonSerializer.Deserialize<ArgumentsJson>(json, options);
-            argumentsJson.mainClass=modLoaderJson.GetMainclass()??argumentsJson.mainClass;
-            //argumentsJson.arguments.game.Add();
+            argumentsJson.mainClass=modLoaderJson.GetMainclass()??argumentsJson.mainClass;//替换mainclass
+            argumentsJson.arguments.game.AddRange(modLoaderJson.GetArgumentsGame().Select(s => new ArgumentsJson.Arguments.Either<string,ArgumentsJson.Arguments.GJRules>(s)).ToList());//添加game
+            argumentsJson.arguments.jvm.AddRange(modLoaderJson.GetArgumentsJvm().Select(s => new ArgumentsJson.Arguments.Either<string, ArgumentsJson.Arguments.GJRules>(s)).ToList());//添加jvm
+            argumentsJson.libraries.AddRange(modLoaderJson.GetLibraries().Select(s => new ArgumentsJson.Librarie { downloads =new () { artifact=new() { 
+                url = s.url, sha1 = s.hash, size = s.size, path = s.path.Replace(PATH.LIBRARIES+"/","").Replace(PATH.LIBRARIES+"\\","") } } }).ToList());//添加lib
             return argumentsJson;
         }
     }

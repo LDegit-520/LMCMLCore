@@ -38,6 +38,9 @@ namespace LMCMLCore.CORE.Install.mc
             var task = downLoadCore.StartDownloadAsync(new() { mcversionjson });
             await Task.WhenAll(task);
             Logger.Info(nameof(MCversioninstall), $"下载版本清单{McVersion.id}.json完成");
+
+
+
             //处理版本清单
             Version_json version_json = new Version_json(mcversionjsonpath,
                 DATA.ARGUMENT_GAME,
@@ -62,6 +65,10 @@ namespace LMCMLCore.CORE.Install.mc
             var task2 = downLoadCore2.StartDownloadAsync(new() { assetsjsonTask });
             await Task.WhenAll(task2);
             Logger.Info(nameof(MCversioninstall), $"下载资源索引{version_json.AssetsIndex.id}.json完成");
+
+
+
+
             //构造所有下载任务
             List<DownLoadTask> downLoadTasks = new List<DownLoadTask>()
                     {
