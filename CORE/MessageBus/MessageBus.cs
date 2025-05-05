@@ -8,49 +8,42 @@ namespace LMCMLCore.CORE.MessageBus
 {
     public class MessageBus
     {
-        public void AddNotifyEvent(MessageTitleContent message)
+        private readonly Dictionary<string, List<MessageSub>> _subs = new Dictionary<string, List<MessageSub>>();
+        public void Publish(MessageBase message)
         {
-            
+            if (_subs.ContainsKey(message.Type)) 
+            {
+                foreach (var sub in _subs[message.Type])
+                {
+                    sub.handler(message);
+                }
+            }
         }
-        public bool AddReturnEvent(MessageTitleContent message)
+        public void Subscribe(string type, Action<MessageBase> handler)
         {
-
-            return true;
-        }
-        public T AddReturnEvent<T>(MessageTitleContent message) where T : class,  new()
-        {
-
-            return new T();
+            if (!_subs.ContainsKey(type))
+            {
+                _subs.Add(type, new List<MessageSub>());
+            }
+            _subs[type].Add(new MessageSub() { handler = handler });
         }
     }
-    public class MessageTitleContent
+    /// <summary>
+    /// 消息基类
+    /// </summary>
+    public class MessageBase
     {
-        public string Title { get; set; }
+        /// <summary>
+        /// 消息类型
+        /// </summary>
+        public string Type  { get; set; }
+        /// <summary>
+        /// 消息内容
+        /// </summary>
         public string Content { get; set; }
-        public MessageTitleContent(string content)
-        {
-            Title  = I18N.I18NString.MessageTitleContent_Title_moren;
-            Content = content;
-        }
-        public MessageTitleContent(string title, string content)
-        {
-            Title = title;
-            Content = content;
-        }
     }
-    /*
-     * 消息总线
-     * 应该为单例模式
-     * 属性
-     *      
-     * 字段
-     *      存储消息的字典
-     * 方法
-     *      添加通知事件
-     *      添加控制事件
-     * 事件
-     *      通知事件，不需要返回值的事件
-     *      控制事件，需要返回值的事件
-     *
-     */
+    public class MessageSub
+    {
+        public Action<MessageBase> handler { get; set; }
+    }
 }
